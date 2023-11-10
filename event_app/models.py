@@ -1,6 +1,17 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
+#define Django Enumeration
+class EventCategory(models.TextChoices):
+    CONFERENCE='CONF','Conference'
+    SEMINAR='SEMI','Seminar'
+    CONGRESS='CONG','Congress'
+    COURSE='COUR','Course'
+    CONCERT='CONC','Concert'
+    FESTIVAL='FEST','Festival'
+    EXHIBITION='EXHI','Exhibition'
+    TOURNAMENT='TOUR','Tournament'
+    OTHER='OTHE','Other'
 class Location(models.Model):
     name = models.CharField(max_length=100, default="")
     description = models.TextField(max_length=1000, default="")
@@ -30,7 +41,8 @@ class Event(models.Model):
     poster = models.ImageField(upload_to='event_app/images/')
     url = models.URLField(blank=True)
     #relationship between Event and Location (*-1)
-    location=models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
+    location=models.ForeignKey(Location, on_delete=models.SET_NULL,null=True, blank=True)
+    category=models.CharField(max_length=4,choices=EventCategory.choices,default=EventCategory.OTHER)
 
     class Meta:
         db_table='events'
@@ -38,7 +50,9 @@ class Event(models.Model):
         #the tuple (name, date, time) can't be repeated
         unique_together=['name', 'date', 'time']
     def __str__(self):
-        return self.name
+        #return "name=%s,date=%s,time=%s" % (self.name, self.date, self.time)
+        #return self.name+" "+str(self.date)+" "+str(self.time)
+        return f'name={self.name},date={self.date},time={self.time}
 
 class Participant(models.Model):
     firstName = models.CharField(max_length=100, default="")
