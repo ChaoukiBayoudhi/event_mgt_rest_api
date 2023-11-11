@@ -2,7 +2,10 @@ asgiref==3.7.2
 Django==4.2.7
 django-cors-headers==4.3.0
 djangorestframework==3.14.0
+djangoviz==0.1.1
+graphqlclient==0.2.4
 Pillow==10.1.0
 psycopg2-binary==2.9.9
 pytz==2023.3.post1
+six==1.16.0
 sqlparse==0.4.4

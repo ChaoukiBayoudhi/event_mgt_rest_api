@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'event_app',
+    'djangoviz',
 ]
 
 MIDDLEWARE = [
@@ -76,17 +77,23 @@ WSGI_APPLICATION = 'event_mgt_rest_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'postgres',
+        'USER':'postgres',
+        'PASSWORD':'pass',
+        'HOST':'127.0.0.1',
+        'PORT':5433
     },
-    'postgresql':{
-        'ENGINE':'django.db.backends.postgres',
-        'NAME':'event_db',
-        'USER':'user01',
-        'PASSWORD':'user01',
-        'HOST':'localhost',
-        'PORT':5432
-    }
+    # 'postgresql':{
+    #     'ENGINE':'django.db.backends.postgres',
+    #     'NAME':'event_db',
+    #     'USER':'user01',
+    #     'PASSWORD':'user01',
+    #     'HOST':'localhost',
+    #     'PORT':5432
+    # }
 }
 
 

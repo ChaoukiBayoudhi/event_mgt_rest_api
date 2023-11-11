@@ -1,5 +1,14 @@
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
+def validate_alphanumeric(value):
+    if not value.isalnum():
+        raise ValidationError(
+            _('Only alphanumeric characters are allowed.'),
+            code='invalid_alphanumeric'
+        )
 # Create your models here.
 #define Django Enumeration
 class EventCategory(models.TextChoices):
@@ -33,10 +42,10 @@ class Location(models.Model):
         return self.name
     
 class Event(models.Model):
-    name = models.CharField(max_length=100, default="")
+    name = models.CharField(max_length=100, default="",validators=[validate_alphanumeric])
     description = models.TextField(max_length=1000, default="")
-   # date = models.DateField(default=timezone.now())
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default=timezone.now)
+    #date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now=True,)
     poster = models.ImageField(upload_to='event_app/images/')
     url = models.URLField(blank=True)
@@ -52,14 +61,14 @@ class Event(models.Model):
     def __str__(self):
         #return "name=%s,date=%s,time=%s" % (self.name, self.date, self.time)
         #return self.name+" "+str(self.date)+" "+str(self.time)
-        return f'name={self.name},date={self.date},time={self.time}
+        return f'name={self.name},date={self.date},time={self.time}'
 
 class Participant(models.Model):
     firstName = models.CharField(max_length=100, default="")
     lastName = models.CharField(max_length=100, default="")
     email = models.EmailField(max_length=100, default="", unique=True)
     phone = models.CharField(max_length=100, default="")
-    birthday = models.DateField(default=timezone.now())
+    birthday = models.DateField(default=timezone.now)
     #relationship between Event and Participant (*-*)
     participation=models.ManyToManyField(Event, through='Reservation',through_fields=('participant','event'))
        
