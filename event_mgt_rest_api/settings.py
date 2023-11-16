@@ -80,11 +80,19 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'postgres',
-        'USER':'postgres',
-        'PASSWORD':'pass',
+        #mysql
+        #'ENGINE':'django.db.backends.mysql',
+        'NAME':'events_db1',
+        #mysql
+        #'USER':'root',
+        'USER':'user01',
+        #mysql
+        #'PASSWORD':''
+        'PASSWORD':'user01',
         'HOST':'127.0.0.1',
-        'PORT':5433
+        #mysql
+        #'PORT':3306
+        'PORT':5432
     },
     # 'postgresql':{
     #     'ENGINE':'django.db.backends.postgres',
