@@ -107,7 +107,6 @@ class Ticket(models.Model):
     reservation=models.OneToOneField(Reservation,on_delete=models.CASCADE,primary_key=True)
     price=models.DecimalField(max_digits=9,decimal_places=2,default=0)
     barCode=models.CharField(max_length=150, blank=True, null=True)
-
     class Meta:
         db_table='tickets'
 
@@ -120,7 +119,7 @@ class Organizer(models.Model):
     email=models.EmailField(max_length=150,default="")
     phone=models.CharField(max_length=150,default="")
     #relationship between Organizer and Event (*-*)
-    OrganizerEvents=models.ManyToManyField(Event)
+    OrganizerEvents=models.ManyToManyField(Event,related_name='Organizers_events')
     class Meta:
         db_table='organizers'
         ordering=['name']
@@ -131,7 +130,7 @@ class Organizer(models.Model):
 class Animator(Contributor):
     url=models.URLField(max_length=100,null=True, blank=True)
     #relationship between Animator and Event (*-*)
-    AnimatorEvents=models.ManyToManyField(Event)
+    AnimatorEvents=models.ManyToManyField(Event,related_name="animator_events")
     class Meta:
         db_table='animators'
         
