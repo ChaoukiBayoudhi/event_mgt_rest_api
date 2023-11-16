@@ -21,15 +21,23 @@ class EventCategory(models.TextChoices):
     EXHIBITION='EXHI','Exhibition'
     TOURNAMENT='TOUR','Tournament'
     OTHER='OTHE','Other'
+
+class Address(models.Model) :
+    houseNumber=models.PositiveIntegerField(default=0)
+    street = models.CharField(max_length=100, default="")
+    city = models.CharField(max_length=100, default="")
+    state = models.CharField(max_length=100, default="")
+    zipCode = models.PositiveIntegerField(max_length=4, default="")
+    class Meta:
+        db_table='addresses'
+        ordering="zipCode"
+    
 class Location(models.Model):
     name = models.CharField(max_length=100, default="")
     description = models.TextField(max_length=1000, default="")
-    address = models.CharField(max_length=100, default="")
-    city = models.CharField(max_length=100, default="")
-    state = models.CharField(max_length=100, default="")
-    zipCode = models.CharField(max_length=100, default="")
     attitude=models.DecimalField(max_digits=9, decimal_places=6, default=0)
     longitude=models.DecimalField(max_digits=9, decimal_places=6, default=0)
+    address=models.OneToOneField(Address,on_delete=models.SET_NULL,blank=True, null=True)
     #this inner class is used to add metadata on the table
     #like table name, constraints (unique_together) index_together
     #some Meta class attributes are:
