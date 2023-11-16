@@ -90,7 +90,7 @@ DATABASES = {
         #mysql
         #'PASSWORD':''
         'PASSWORD':'user01',
-        'HOST':'127.0.0.1',
+        'HOST':'127.0.0.1',#localhost
         #mysql
         #'PORT':3306
         'PORT':5432
