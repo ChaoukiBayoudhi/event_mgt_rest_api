@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'event_app',
     'djangoviz',
+    'rest_framework', #DRF
 ]
 
 MIDDLEWARE = [
@@ -82,10 +83,10 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql',
         #mysql
         #'ENGINE':'django.db.backends.mysql',
-        'NAME':'events_db1',
+        'NAME':'events_db',
         #mysql
         #'USER':'root',
-        'USER':'user01',
+        'USER':'user01',#postgres
         #mysql
         #'PASSWORD':''
         'PASSWORD':'user01',

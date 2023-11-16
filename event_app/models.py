@@ -27,7 +27,7 @@ class Address(models.Model) :
     street = models.CharField(max_length=100, default="")
     city = models.CharField(max_length=100, default="")
     state = models.CharField(max_length=100, default="")
-    zipCode = models.PositiveIntegerField(default="")
+    zipCode = models.PositiveIntegerField(default=0)
     class Meta:
         db_table='addresses'
         ordering=["zipCode"]
