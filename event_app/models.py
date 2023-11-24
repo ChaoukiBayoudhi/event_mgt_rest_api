@@ -31,6 +31,8 @@ class Address(models.Model) :
     class Meta:
         db_table='addresses'
         ordering=["zipCode"]
+    def __str__(self):
+        return 'house number=%s street=%s city=%s' % (self.houseNumber, self.street, self.city)
     
 class Location(models.Model):
     name = models.CharField(max_length=100, default="")
@@ -47,7 +49,7 @@ class Location(models.Model):
         ordering=['name'] #the location tuples will be ordered by name in ascending order
         #ordering=['-name'] #the location tuples will be ordered by name in descending order
     def __str__(self):
-        return self.name
+        return f'name={self.name},altitude={self.altitude},longitude={self.longitude}'
     
 class Event(models.Model):
     name = models.CharField(max_length=100, default="",validators=[validate_alphanumeric])
@@ -116,7 +118,7 @@ class Ticket(models.Model):
 
 class Organizer(models.Model):
     name=models.CharField(max_length=150,default="")
-    email=models.EmailField(max_length=150,default="")
+    email=models.EmailField(max_length=150,default="",unique=True)
     phone=models.CharField(max_length=150,default="")
     #relationship between Organizer and Event (*-*)
     OrganizerEvents=models.ManyToManyField(Event,related_name='Organizers_events')
@@ -125,7 +127,7 @@ class Organizer(models.Model):
         ordering=['name']
 
     def __str__(self):
-        return self.name
+        return f'name={self.name},email={self.email},phone={self.phone}'
 
 class Animator(Contributor):
     url=models.URLField(max_length=100,null=True, blank=True)

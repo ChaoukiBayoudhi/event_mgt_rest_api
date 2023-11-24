@@ -12,7 +12,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
         
 class EventSerializer(serializers.ModelSerializer):
-    location=LocationSerializer()
+    #location=LocationSerializer()
     class Meta:
         model=Event
         fields='__all__'
@@ -30,4 +30,9 @@ class  ReservationSerializer(serializers.ModelSerializer):
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model=Ticket
-        fields='__all__' 
+        fields='__all__'
+
+class Organizer(serializers.ModelSerializer):
+    class Meta:
+        model=Participant
+        fields='__all__'
